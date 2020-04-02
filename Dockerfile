@@ -34,8 +34,11 @@ RUN git clone https://github.com/magento/magento2.git /var/www/magento2
 # Install composer from the official image
 COPY --from=composer /usr/bin/composer /usr/bin/composer
 
+# Add application working directory
+WORKDIR /var/www/magento2
+
 # Run composer install to install the dependencies
-RUN composer install --optimize-autoloader --no-interaction --no-progress /var/www/magento2
+RUN composer install --optimize-autoloader --no-interaction --no-progress
 
 # Make sure files/folders needed by the processes are accessable when they run under the nobody user
 RUN chown -R nobody.nobody /var/www/magento2 && \
