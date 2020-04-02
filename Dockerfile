@@ -37,11 +37,7 @@ RUN chown -R nobody.nobody /var/www/magento2 && \
   chown -R nobody.nobody /run && \
   chown -R nobody.nobody /var/lib/nginx && \
   chown -R nobody.nobody /var/log/nginx
-
-# Make sure Magento 2 can write in these folders
-RUN find var generated vendor pub/static pub/media app/etc -type f -exec chmod g+w {} +
-RUN find var generated vendor pub/static pub/media app/etc -type d -exec chmod g+ws {} +
-
+  
 # Make the document root a volume
 VOLUME /var/www/magento2
 
@@ -56,6 +52,10 @@ COPY --from=composer /usr/bin/composer /usr/bin/composer
 
 # Run composer install to install the dependencies
 RUN composer install --optimize-autoloader --no-interaction --no-progress
+
+# Make sure Magento 2 can write in these folders
+RUN find var generated vendor pub/static pub/media app/etc -type f -exec chmod g+w {} +
+RUN find var generated vendor pub/static pub/media app/etc -type d -exec chmod g+ws {} +
 
 # Expose the port nginx is reachable on
 EXPOSE 8080
