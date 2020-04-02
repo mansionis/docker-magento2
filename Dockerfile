@@ -8,7 +8,7 @@ RUN apk --no-cache update && apk --no-cache upgrade
 # Install packages
 RUN apk --no-cache add supervisor curl zip git nginx php7 php7-cli php7-fpm php7-phar php7-json php7-mbstring php7-iconv \
     php7-openssl php7-bcmath php7-ctype php7-curl php7-dom php7-gd php7-intl php7-pdo_mysql php7-xmlreader php7-xml \
-    php7-soap php7-xsl php7-zip php7-xmlwriter php7-sockets php7-simplexml php7-tokenizer php7-fileinfo
+    php7-soap php7-xsl php7-zip php7-xmlwriter php7-sockets php7-simplexml php7-tokenizer php7-fileinfo busybox-extras
 
 #php7-mysqli  php7-zlib php7-session  
 
