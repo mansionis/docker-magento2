@@ -6,10 +6,11 @@ LABEL Maintainer="Mansionis" \
 RUN apk --no-cache update && apk --no-cache upgrade
 
 # Install packages
-RUN apk --no-cache add supervisor curl git nginx php7 php7-cli php7-fpm php7-phar php7-json php7-mbstring php7-iconv \
-    php7-openssl
+RUN apk --no-cache add supervisor curl zip git nginx php7 php7-cli php7-fpm php7-phar php7-json php7-mbstring php7-iconv \
+    php7-openssl php7-bcmath php7-ctype php7-curl php7-dom php7-gd php7-intl php7-pdo_mysql php7-xml php7-soap \
+    php7-xsl php7-zip
 
-#php7-mysqli  php7-curl php7-zlib php7-xml php7-intl php7-dom php7-xmlreader php7-ctype php7-session php7-gd php7-bcmath 
+#php7-mysqli  php7-zlib php7-xmlreader php7-session  
 
 # Configure nginx
 COPY config/nginx.conf /etc/nginx/nginx.conf
