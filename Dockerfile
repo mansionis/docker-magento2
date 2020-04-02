@@ -29,9 +29,6 @@ COPY config/php.ini /etc/php7/conf.d/magento2.ini
 # Configure supervisord
 COPY config/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
-# Copy the docker-entry
-COPY docker-entrypoint.sh /entrypoint.sh
-
 # Setup document root
 RUN git clone https://github.com/magento/magento2.git /var/www
 
