@@ -10,5 +10,7 @@ echo ''
 git clone https://github.com/magento/magento2.git /var/www/magento2
 cd /var/www/magento2
 composer install --optimize-autoloader --no-interaction --no-progress
+RUN find var generated vendor pub/static pub/media app/etc -type f -exec chmod g+w {} +
+RUN find var generated vendor pub/static pub/media app/etc -type d -exec chmod g+ws {} +
 
 /usr/bin/supervisord -c /etc/supervisor/conf.d/supervisord.conf
