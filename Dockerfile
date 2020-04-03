@@ -57,8 +57,8 @@ USER nobody
 WORKDIR /var/www/magento2
 
 # Make sure Magento 2 can write in these folders
-RUN find var generated vendor pub/static pub/media app/etc -type f -exec chmod g+w {} +
-RUN find var generated vendor pub/static pub/media app/etc -type d -exec chmod g+ws {} +
+# RUN find var generated vendor pub/static pub/media app/etc -type f -exec chmod g+w {} +
+# RUN find var generated vendor pub/static pub/media app/etc -type d -exec chmod g+ws {} +
 
 # Expose the port nginx is reachable on
 EXPOSE 8080
