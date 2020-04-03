@@ -26,7 +26,8 @@ COPY config/php.ini /etc/php7/conf.d/magento2.ini
 COPY config/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
 # Setup document root
-RUN git clone https://github.com/magento/magento2.git /var/www/magento2
+#RUN git clone https://github.com/magento/magento2.git /var/www/magento2
+RUN mkdir -p /var/www/magento2/.composer
 
 # Ensure the cache folder for Composer is present
 #RUN mkdir /var/www/magento2/.composer
@@ -38,7 +39,7 @@ COPY --from=composer /usr/bin/composer /usr/bin/composer
 WORKDIR /var/www/magento2
 
 # Run composer install to install the dependencies
-RUN composer install --optimize-autoloader --no-interaction --no-progress
+#RUN composer install --optimize-autoloader --no-interaction --no-progress
 
 # Make sure files/folders needed by the processes are accessable when they run under the nobody user
 RUN chown -R nobody.nobody /var/www/magento2 && \
@@ -59,12 +60,14 @@ WORKDIR /var/www/magento2
 RUN find var generated vendor pub/static pub/media app/etc -type f -exec chmod g+w {} +
 RUN find var generated vendor pub/static pub/media app/etc -type d -exec chmod g+ws {} +
 
-
 # Expose the port nginx is reachable on
 EXPOSE 8080
 
+COPY docker-entrypoint.sh /entrypoint.sh
+ENTRYPOINT ["/entrypoint.sh"]
+
 # Let supervisord start nginx & php-fpm
-CMD ["/usr/bin/supervisord", "-c", "/etc/supervisor/conf.d/supervisord.conf"]
+#CMD ["/usr/bin/supervisord", "-c", "/etc/supervisor/conf.d/supervisord.conf"]
 
 # Configure a healthcheck to validate that everything is up&running
-HEALTHCHECK --timeout=10s CMD curl --silent --fail http://127.0.0.1:8080/fpm-ping
+#HEALTHCHECK --timeout=10s CMD curl --silent --fail http://127.0.0.1:8080/fpm-ping
