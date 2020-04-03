@@ -13,4 +13,4 @@ composer install --optimize-autoloader --no-interaction --no-progress
 find var generated vendor pub/static pub/media app/etc -type f -exec chmod g+w {} +
 find var generated vendor pub/static pub/media app/etc -type d -exec chmod g+ws {} +
 
-/usr/bin/supervisord -c /etc/supervisor/conf.d/supervisord.conf
+gosu nobody /usr/bin/supervisord -c /etc/supervisor/conf.d/supervisord.conf
