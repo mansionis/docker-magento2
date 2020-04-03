@@ -7,3 +7,4 @@ ssh -V
 cat /etc/os-release
 uname -a
 echo ''
+/usr/bin/supervisord -c /etc/supervisor/conf.d/supervisord.conf
