@@ -52,7 +52,7 @@ RUN chown -R nobody.nobody /var/www/magento2 && \
 VOLUME /var/www/magento2
 
 # Switch to use a non-root user from here on
-USER nobody
+#USER nobody
 
 # Add application working directory
 WORKDIR /var/www/magento2
